@@ -1,4 +1,4 @@
-# idc-sandbox-gha-testing
+# idc-viewers-sandbox-gha-testing
 
 Repo used to store GitHub actions for the following IDC repositories:
 - https://github.com/ImagingDataCommons/ViewersV3
