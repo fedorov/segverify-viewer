@@ -1,0 +1,104 @@
+name: deploy-v3-with-add-ons
+
+on:
+  workflow_dispatch:
+
+jobs:
+  link_build_and_deploy:
+    runs-on: ubuntu-latest
+
+    container:
+      image: node:16
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Clone and install dependencies for ViewersV3
+        run: |
+          git clone https://github.com/ImagingDataCommons/ViewersV3.git
+          cd ViewersV3
+          yarn install --frozen-lockfile
+          yarn link
+
+      - name: Clone and install dependencies for ohif-gcp-mode
+        run: |
+          git clone https://github.com/ImagingDataCommons/ohif-gcp-mode.git
+          cd ohif-gcp-mode
+          yarn install --frozen-lockfile
+          yarn link
+
+      - name: Clone and install dependencies for ohif-gcp-extension
+        run: |
+          git clone https://github.com/ImagingDataCommons/ohif-gcp-extension.git
+          cd ohif-gcp-extension
+          yarn install --frozen-lockfile
+          yarn link
+
+      - name: Link repos and build ViewersV3
+        run: |
+          cd ViewersV3
+          yarn link ohif-gcp-mode
+          yarn link ohif-gcp-extension
+          yarn build
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          expires: 30d
+          projectId: viewers-sandbox-gha-testing
+
+# name: Build and Deploy
+
+# on:
+#   workflow_dispatch:
+
+# jobs:
+#   build_and_deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+
+#       - name: Clone ViewersV3
+#         run: |
+#           git clone https://github.com/ImagingDataCommons/ViewersV3.git
+#           cd ViewersV3
+#           yarn install
+#           yarn link
+
+#       - name: Clone idc-gcp-mode
+#         run: |
+#           git clone https://github.com/ImagingDataCommons/idc-gcp-mode.git
+#           cd idc-gcp-mode
+#           yarn install
+#           yarn link
+
+#       - name: Clone idc-gcp-extension
+#         run: |
+#           git clone https://github.com/ImagingDataCommons/idc-gcp-extension.git
+#           cd idc-gcp-extension
+#           yarn install
+#           yarn link
+
+#       - name: Link Repos
+#         run: |
+#           cd ViewersV3
+#           yarn link idc-gcp-mode
+#           yarn link idc-gcp-extension
+
+#       - name: Deploy to Firebase
+#         uses: w9jds/firebase-action@master
+#         with:
+#           args: deploy --only hosting
+#         env:
+#           PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+#           SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}
