@@ -38,6 +38,7 @@ jobs:
       - name: Link repos and build ViewersV3
         run: |
           cd ViewersV3
+          wget -O /content/Viewers/firebase.json https://gist.githubusercontent.com/igoroctaviano/13e66efc715b3f6d84bbb4505ec8f5a1/raw/9c15ab00e37e79d7dffd02b0ca63796dcae02d20/firebase.json
           yarn link ohif-gcp-mode
           yarn link ohif-gcp-extension
           yarn build
