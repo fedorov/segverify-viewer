@@ -44,12 +44,13 @@ jobs:
           yarn build
 
       - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        uses: FirebaseExtended/action-hosting-deploy@v0.7.1
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           expires: 30d
           projectId: viewers-sandbox-gha-testing
+          entryPoint: ./ViewersV3
 
 # name: Build and Deploy
 
