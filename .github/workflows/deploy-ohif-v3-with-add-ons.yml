@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: node:16
+      image: node:18
 
     steps:
       - name: Checkout code
@@ -51,6 +51,7 @@ jobs:
           expires: 30d
           projectId: viewers-sandbox-gha-testing
           entryPoint: ./ViewersV3
+          channelId: 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
 
 # name: Build and Deploy
 
