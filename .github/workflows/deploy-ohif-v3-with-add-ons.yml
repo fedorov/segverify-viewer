@@ -37,7 +37,7 @@ jobs:
       - name: Link ohif-gcp-mode and ohif-gcp-extension to OHIF and build
         run: |
           cd ViewersV3
-          echo "${{ fromJson(vars.OHIF_FIREBASE_JSON) }}" > ./firebase.json
+          echo "${{ vars.OHIF_FIREBASE_JSON }}" > ./firebase.json
           echo "${{ vars.OHIF_CONFIG_JS }}" > ./platform/app/public/config/test.js
           yarn link ohif-gcp-mode
           yarn link ohif-gcp-extension
