@@ -24,7 +24,7 @@ jobs:
         run: |
           cd slim
           echo "${{ vars.SLIM_FIREBASE_JSON }}" > ./firebase.json
-          echo "${{ vars.SLIM_CONFIG_JSON }}" > ./public/config/test.json
+          echo "${{ vars.SLIM_CONFIG_JS }}" > ./public/config/test.js
           REACT_APP_CONFIG=test PUBLIC_URL=/ yarn build
 
       - name: Deploy to Firebase
