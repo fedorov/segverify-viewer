@@ -4,6 +4,8 @@ Repo used to store GitHub actions for the following IDC repositories:
 - https://github.com/ImagingDataCommons/ViewersV3
 - https://github.com/ImagingDataCommons/ohif-idc-mode
 - https://github.com/ImagingDataCommons/ohif-gcp-mode
+- https://github.com/ImagingDataCommons/slim
+- https://github.com/ImagingDataCommons/dicom-microscopy-viewer
 
 ## GitHub Actions
 - **ohif/deploy-v3**: Deploys a preview of [ViewersV3](https://github.com/ImagingDataCommons/ViewersV3)'s master branch
