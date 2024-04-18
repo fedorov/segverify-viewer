@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: node:18
+      image: node:20
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
       
       - name: Clone and install dependencies for ViewersV3
         run: |

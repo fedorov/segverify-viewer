@@ -1,4 +1,4 @@
-name: deploy-v3
+name: deploy-slim
 
 on:
   workflow_dispatch:
@@ -13,17 +13,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
-      
-      - name: Clone and install dependencies for ViewersV3
+
+      - name: Clone and install dependencies for SLIM
         run: |
-          git clone https://github.com/ImagingDataCommons/ViewersV3.git
-          cd ViewersV3
+          git clone https://github.com/ImagingDataCommons/slim.git
+          cd slim
           yarn install --frozen-lockfile
 
-      - name: build ViewersV3
+      - name: build slim
         run: |
-          cd ViewersV3
-          wget -O ./firebase.json "${{ vars.FIREBASE_JSON_URL }}"
+          cd slim
+          wget -O ./firebase.json "${{ vars.SLIM_FIREBASE_JSON_URL }}"
           yarn build
 
       - name: Deploy to Firebase
@@ -33,6 +33,6 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           expires: 30d
           projectId: viewers-sandbox-gha-testing
-          entryPoint: ./ViewersV3
-          channelId: live 
+          entryPoint: ./slim
+          channelId: live
           # channelId: # 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
