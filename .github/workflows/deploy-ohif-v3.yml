@@ -1,10 +1,10 @@
-name: deploy-v3-with-add-ons
+name: deploy-v3
 
 on:
   workflow_dispatch:
 
 jobs:
-  link_build_and_deploy:
+  build_and_deploy:
     runs-on: ubuntu-latest
 
     container:
@@ -20,26 +20,10 @@ jobs:
           cd ViewersV3
           yarn install --frozen-lockfile
 
-      - name: Clone and install dependencies for ohif-gcp-mode
-        run: |
-          git clone https://github.com/ImagingDataCommons/ohif-gcp-mode.git
-          cd ohif-gcp-mode
-          yarn install --frozen-lockfile
-          yarn link
-
-      - name: Clone and install dependencies for ohif-gcp-extension
-        run: |
-          git clone https://github.com/ImagingDataCommons/ohif-gcp-extension.git
-          cd ohif-gcp-extension
-          yarn install --frozen-lockfile
-          yarn link
-
       - name: Link repos and build ViewersV3
         run: |
           cd ViewersV3
           wget -O ./firebase.json "${{ vars.FIREBASE_JSON_URL }}"
-          yarn link ohif-gcp-mode
-          yarn link ohif-gcp-extension
           yarn build
 
       - name: Deploy to Firebase
