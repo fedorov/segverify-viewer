@@ -1,4 +1,4 @@
-name: deploy-slim-with-dmv
+name: slim/deploy-with-dmv
 
 on:
   workflow_dispatch:

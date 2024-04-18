@@ -1,4 +1,4 @@
-name: deploy-v3-with-add-ons
+name: ohif/deploy-v3-with-add-ons
 
 on:
   workflow_dispatch:

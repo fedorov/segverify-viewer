@@ -1,4 +1,4 @@
-name: deploy-slim
+name: slim/deploy
 
 on:
   workflow_dispatch:
