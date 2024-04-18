@@ -1,0 +1,47 @@
+name: deploy-slim-with-dmv
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    container:
+      image: node:20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+
+      - name: Clone and install SLIM dependencies
+        run: |
+          git clone https://github.com/ImagingDataCommons/slim.git
+          cd slim
+          yarn install --frozen-lockfile
+
+      - name: Clone and install dicom-microscopy-viewer dependencies
+        run: |
+          git clone https://github.com/ImagingDataCommons/dicom-microscopy-viewer.git
+          cd dicom-microscopy-viewer
+          yarn install --frozen-lockfile
+          yarn link
+
+      - name: Build slim
+        run: |
+          cd slim
+          yarn link dicom-microscopy-viewer
+          wget -O ./firebase.json "${{ vars.SLIM_FIREBASE_JSON_URL }}"
+          wget -O ./public/config/test.js "${{ vars.SLIM_CONFIG_JS_URL }}"
+          REACT_APP_CONFIG=test PUBLIC_URL=/ yarn build
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0.7.1
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          expires: 30d
+          projectId: viewers-sandbox-gha-testing
+          entryPoint: ./slim
+          channelId: live
+          # channelId: # 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
