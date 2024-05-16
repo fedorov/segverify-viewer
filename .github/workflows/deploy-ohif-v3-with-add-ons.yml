@@ -48,8 +48,8 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          expires: 30d
-          projectId: viewers-sandbox-gha-testing
+          expires: 5d
+          projectId: "${{ vars.FIREBASE_PROJECT_ID }}"
           entryPoint: ./ViewersV3
           channelId: live 
           # channelId: # 'pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }}'
