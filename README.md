@@ -31,4 +31,23 @@ This repository contains the following GitHub Actions for automated deployment a
 All actions deploy to:  
 [https://viewers-sandbox-gha-testing.web.app/](https://viewers-sandbox-gha-testing.web.app/)
 
+## Configuration
+
+The following environment variables are required for configuring the GitHub Actions:
+
+- **FIREBASE_PROJECT_ID**  
+  Firebase project identifier.
+  
+- **OHIF_CONFIG_JS_URL**  
+  URL to a Gist containing the OHIF configuration (with OIDC).
+
+- **OHIF_FIREBASE_JSON_URL**  
+  URL to the Firebase configuration for OHIF.
+
+- **SLIM_CONFIG_JS_URL**  
+  URL to a Gist containing the Slim Viewer configuration (with OIDC).
+
+- **SLIM_FIREBASE_JSON_URL**  
+  URL to the Firebase configuration for Slim Viewer.
+
 ---
