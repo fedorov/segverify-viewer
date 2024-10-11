@@ -26,6 +26,7 @@ jobs:
           cd dicom-microscopy-viewer
           yarn install --frozen-lockfile
           yarn link
+          yarn build
 
       - name: Build slim
         run: |
