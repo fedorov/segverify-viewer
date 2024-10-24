@@ -25,22 +25,20 @@ jobs:
           git clone https://github.com/ImagingDataCommons/ohif-gcp-mode.git
           cd ohif-gcp-mode
           yarn install --frozen-lockfile
-          yarn link
 
       - name: Clone and install ohif-gcp-extension dependencies
         run: |
           git clone https://github.com/ImagingDataCommons/ohif-gcp-extension.git
           cd ohif-gcp-extension
           yarn install --frozen-lockfile
-          yarn link
 
       - name: Link ohif-gcp-mode and ohif-gcp-extension to OHIF and build
         run: |
           cd Viewers
           wget -O ./firebase.json "${{ vars.OHIF_FIREBASE_JSON_URL }}"
           wget -O ./platform/app/public/config/test.js "${{ vars.OHIF_CONFIG_JS_URL }}"
-          yarn link ohif-gcp-mode
-          yarn link ohif-gcp-extension
+          yarn cli link-extension ../ohif-gcp-mode
+          yarn cli link-extension ../ohif-gcp-extension
           PUBLIC_URL=/ APP_CONFIG=config/test.js yarn build
 
       - name: Deploy to Firebase
