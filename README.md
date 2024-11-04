@@ -31,6 +31,8 @@ This repository contains the following GitHub Actions for automated deployment a
 
   - [OHIF GCP Mode](https://github.com/ImagingDataCommons/ohif-gcp-mode)
   - [OHIF GCP Extension](https://github.com/ImagingDataCommons/ohif-gcp-extension)
+ 
+  Format of the URL for configuring secondary GHC DICOM store: `https://viewers-sandbox-gha-testing.web.app/viewer?StudyInstanceUIDs=<UID>&gcp=projects/<project>/locations/<location>/datasets/<dataset>/dicomStores/<store>`
 
 - **slim/deploy**  
   Deploys the latest version of [Slim Viewer](https://github.com/ImagingDataCommons/slim).
