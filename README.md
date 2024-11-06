@@ -34,6 +34,9 @@ This repository contains the following GitHub Actions for automated deployment a
  
   Format of the URL for configuring secondary GHC DICOM store: `https://viewers-sandbox-gha-testing.web.app/viewer?StudyInstanceUIDs=<UID>&gcp=projects/<project>/locations/<location>/datasets/<dataset>/dicomStores/<store>`
 
+  Switching primary DICOM store: `http://localhost:3000/projects/project-x/locations/us/datasets/some-dataset/dicomStores/test-samples/study/1.3.6.1.4.1.123.5.2.1.123.123.123`
+
+
 - **slim/deploy**  
   Deploys the latest version of [Slim Viewer](https://github.com/ImagingDataCommons/slim).
 
