@@ -48,6 +48,8 @@ This repository contains the following GitHub Actions for automated deployment a
 All actions deploy to:  
 [https://viewers-sandbox-gha-testing.web.app/](https://viewers-sandbox-gha-testing.web.app/)
 
+Consent screen is managed under `idc-external-031`.
+
 ## Configuration
 
 The following environment variables are required for configuring the GitHub Actions:
