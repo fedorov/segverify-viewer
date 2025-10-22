@@ -18,7 +18,7 @@ jobs:
         run: |
           git clone https://github.com/OHIF/Viewers.git
           cd Viewers
-          git checkout v3.11.0
+          git checkout v3.9.3
           yarn install --frozen-lockfile
 
       - name: Clone and install ohif-secondary-dicomweb-extension dependencies
